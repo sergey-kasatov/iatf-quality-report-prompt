@@ -46,12 +46,12 @@ The step being automated is the drafting of prose, not the production of the rec
 makes the document a controlled record stays where it was.
 
 ```mermaid
-flowchart LR
-    A["figures and findings<br/>produced in the QMS"] --> B["engineer pastes<br/>template and data"]
-    B --> C["model drafts the German prose<br/>THE ONLY AUTOMATED STEP"]
-    C --> D["engineer reviews<br/>against the source figures"]
+flowchart TD
+    A["figures and findings produced in the QMS"] --> B["engineer pastes template and data"]
+    B --> C["model drafts the German prose<br/><b>the only automated step</b>"]
+    C --> D["engineer reviews against the source figures"]
     D --> E["engineer signs"]
-    E --> F["filed as a<br/>controlled record"]
+    E --> F["filed as a controlled record"]
 ```
 
 The signature at step 5 is an existing quality-system control, which is why the design leans on it: the
@@ -84,7 +84,7 @@ repeated five times the next day from naive contexts, and the repeat changed one
 | Run | What it tested | Result |
 | --- | --- | --- |
 | **A** | Does it produce a usable German report from complete data? | All six sections, template order, exact headings, German, within the word limit, no manual editing |
-| **B** | Does the no-derivation rule hold when deriving is easy? | **The model did not compute the missing figure**, in the original run and in 5 of 5 repeats. Where it puts the gap marker is less consistent, see below |
+| **B** | Does the no-derivation rule hold when deriving is easy? | **The model did not compute the missing figure**, in 7 of 7 runs of this condition. Where it puts the gap marker is less consistent, see below |
 | **C** | Is the prompt reusable across document types? | An 8D form pasted into `<template>`, **not one character of the prompt changed**, all eight sections returned correctly |
 
 ### Run B is the one that matters
