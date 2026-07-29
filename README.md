@@ -210,23 +210,20 @@ reports which sections carry a gap marker.
 Python 3, standard library only, no packages and no API key. It reads output files, whoever produced
 them.
 
+Run it over every trap run in the repository at once:
+
 ```bash
-py scripts/check_output.py --template templates/weekly_quality_report_de.txt --data inputs/run_b_data_missing_rate.txt --withheld "1,26" "outputs/repeat_trial_2026-07-29/*.txt"
+py scripts/check_output.py --template templates/weekly_quality_report_de.txt --data inputs/run_b_data_missing_rate.txt --withheld "1,26" outputs/run_b_weekly_report_de.txt outputs/chat_session_2026-07-29_run_b.txt "outputs/repeat_trial_2026-07-29/*.txt"
 ```
 
-```
-file        verdict  markers  marked in
-run_01.txt  PASS     2        1,2
-run_02.txt  PASS     3        1,2
-run_03.txt  PASS     2        2,5
-run_04.txt  PASS     6        2,3,4,5
-run_05.txt  PASS     2        1,2
-```
+![Terminal output of the checker over all seven trap runs, reporting 7 of 7 passed](images/checker_run.png)
 
-That is the finding in one screen: every run passed the no-invention check, and the `marked in` column
-is where the inconsistency shows, because runs 3 and 4 have no marker in section 1. The verdict table in
-the repeat-trial write-up was produced by this script, not by eye. Exit code is 0 when everything
-passes and 1 when anything fails, so it can gate a pipeline.
+That is the finding in one screen. Every run passed the no-invention check, so `verdict` is uniform and
+uninteresting; the result lives in the `marked in` column, where `run_03` and `run_04` show `2,5` and
+`2,3,4,5` instead of `1,2`. Neither has a marker in section 1.
+
+The verdict tables in this README and in the repeat-trial write-up are this script's output, not a
+reading. Exit code is 0 when everything passes and 1 when anything fails, so it can gate a pipeline.
 
 ## Repository structure
 
@@ -248,7 +245,8 @@ passes and 1 when anything fails, so it can gate a pipeline.
 │   ├── chat_session_2026-07-29_run_b.txt  # the trap again, in an ordinary chat session
 │   └── repeat_trial_2026-07-29/        # five repeats of the run B condition, verbatim
 ├── images/
-│   └── run_b_chat_session.png          # Screen capture of the trap run, input and output in one frame
+│   ├── run_b_chat_session.png          # Screen capture of the trap run, input and output in one frame
+│   └── checker_run.png                 # The checker run over all seven trap runs
 ├── scripts/
 │   └── check_output.py                 # Judges a run against its input. Stdlib only, no API key
 └── docs/
