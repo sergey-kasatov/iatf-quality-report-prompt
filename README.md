@@ -112,6 +112,15 @@ nothing else in the document. Section 6 kept the engineer's own written assessme
 was falling, because that sentence was in the source data: the model reported the assessment without
 re-deriving the number behind it.
 
+![The trap and the response in one frame: the data zone carries 48.500 and 611 with no scrap rate, and the reply writes ANGABE FEHLT where the rate would go](images/run_b_chat_session.png)
+
+*The whole exchange, unedited. Claude Opus 5 in an ordinary chat session, 2026-07-29, the run B condition
+repeated in the environment runs A to C were made in; transcript at
+[`outputs/chat_session_2026-07-29_run_b.txt`](outputs/chat_session_2026-07-29_run_b.txt). In `<data>`:
+`Produktion: 48.500 Teile` and `Ausschuss: 611 Teile`, and no scrap rate. In sections 1 and 2 of the
+reply: `[ANGABE FEHLT]` where the rate belongs, with last week's `1,41 Prozent` still sitting next to it.
+All figures are synthetic.*
+
 ### Repeating it five times changed one of those two claims
 
 A result seen once tells you a behaviour is possible, not how often it happens. The run B condition was
@@ -171,6 +180,9 @@ It does not show reliability. Honestly stated:
 - **No input validation.** The prompt does not check whether the pasted data is complete. Anything absent
   comes back as a gap marker rather than as a guess, which is the desired behaviour, but it makes output
   quality depend on a careful paste. That is a preparation step for the engineer, not a prompt change.
+- **One run carries a screen capture, the rest are transcripts.** The outputs in `outputs/` are copied
+  text. They are faithful, but text can be edited and a reader has no way to tell from the file alone.
+  The capture above is the one run where that gap is closed.
 
 For real use the next step would be a retrospective pilot: re-draft reports that are already closed and
 signed, then compare each draft against its original on template conformance, accuracy of every restated
@@ -235,6 +247,8 @@ passes and 1 when anything fails, so it can gate a pipeline.
 │   ├── run_c_8d_report_de.txt
 │   ├── chat_session_2026-07-29_run_b.txt  # the trap again, in an ordinary chat session
 │   └── repeat_trial_2026-07-29/        # five repeats of the run B condition, verbatim
+├── images/
+│   └── run_b_chat_session.png          # Screen capture of the trap run, input and output in one frame
 ├── scripts/
 │   └── check_output.py                 # Judges a run against its input. Stdlib only, no API key
 └── docs/
