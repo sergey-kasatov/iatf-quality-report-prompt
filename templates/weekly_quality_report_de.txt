@@ -1,0 +1,9 @@
+Woechentlicher Qualitaetsbericht
+Werk: [Werk] | Kalenderwoche: [KW] | Ersteller: [Name] | Datum: [Datum]
+
+1 - Zusammenfassung der Woche
+2 - Ausschuss und Nacharbeit
+3 - Kundenreklamationen
+4 - Liefertreue
+5 - Interne Audits und offene Massnahmen
+6 - Bewertung und naechste Schritte

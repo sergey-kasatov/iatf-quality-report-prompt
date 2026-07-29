@@ -1,0 +1,32 @@
+1 - Zusammenfassung der Woche
+In der Kalenderwoche 30/2026 wurden im Werk Heilbronn 2 insgesamt 48.500 Teile gefertigt,
+gegenueber 46.200 Teilen in der Vorwoche. Die Ausschussquote ging von 1,41 Prozent auf
+1,26 Prozent zurueck. Die Liefertreue lag mit 96,4 Prozent unter dem Zielwert von 98 Prozent.
+Aus dem Prozessaudit im Bereich Zerspanung vom 22.07.2026 gingen drei Feststellungen hervor,
+darunter eine Hauptbeanstandung.
+
+2 - Ausschuss und Nacharbeit
+Ausschuss: 611 Teile, entsprechend einer Ausschussquote von 1,26 Prozent (Vorwoche
+1,41 Prozent). Nacharbeit: 284 Teile, entsprechend einer Nacharbeitsquote von 0,59 Prozent
+(Vorwoche 0,52 Prozent). Als Hauptausschussursache nennt die Fertigung eine Massabweichung an
+Bohrstation 30; auf sie entfallen 402 der 611 Ausschussteile.
+
+3 - Kundenreklamationen
+Zwei Reklamationen wurden neu eroeffnet, durch die Adler Automotive AG und die Kern
+Antriebstechnik GmbH. Eine Reklamation wurde geschlossen. Zum Wochenende waren fuenf
+Reklamationen offen. Der kundenseitige PPM-Wert betraegt 38 gegenueber 44 in der Vorwoche;
+der Zielwert liegt bei 25.
+
+4 - Liefertreue
+Die Liefertreue (OTD) betraegt 96,4 Prozent gegenueber 97,1 Prozent in der Vorwoche und liegt
+damit unter dem Zielwert von 98 Prozent. Zwei Sendungen waren verspaetet; in beiden Faellen war
+die Materialverfuegbarkeit die Ursache.
+
+5 - Interne Audits und offene Massnahmen
+Am 22.07.2026 wurde ein Prozessaudit im Bereich Zerspanung durchgefuehrt. Es ergaben sich drei
+Feststellungen, davon eine Hauptbeanstandung zur Werkzeugstandzeitueberwachung. Insgesamt sind
+elf Massnahmen offen, davon zwei ueberfaellig.
+
+6 - Bewertung und naechste Schritte
+Die Ausschussquote ist ruecklaeufig. Die Liefertreue liegt unter dem Zielwert. Schwerpunkt der
+Folgewoche ist die Werkzeugstandzeitueberwachung.

@@ -1,0 +1,32 @@
+# NOTE ON THIS FILE
+# Reconstructed from the recorded summary of the run C data zone. The verbatim paste used in
+# the original run was not preserved; every fact below is taken from that record. Re-running
+# with this file should reproduce the same output in substance, but it is not byte-identical
+# to the original input. Runs A and B are byte-identical to what was actually submitted.
+
+Team: Qualitaetsingenieur mit Berichtsverantwortung S. Kasatov. Weitere Beteiligte:
+Fertigungsleitung Zerspanung, Werkzeugbau, Qualitaetspruefung Wareneingang.
+
+Teil: Tuerscharnier-Halter, Sachnummer HS-4471-02, Kundenteilenummer 8K0-831-401-C.
+Reklamation des Kunden vom 15.06.2026. Betroffen: 12 von 480 Teilen aus Lieferung LS-2026-1187.
+Merkmal: Bohrung Nenndurchmesser 8,20 mm, Toleranz +0,10 / -0,00.
+Messwerte der beanstandeten Teile: 8,41 bis 8,52 mm, damit ausserhalb der Toleranz.
+
+Sofortmassnahmen: 100-Prozent-Sortierung des Restbestands beim Kunden und im Werk.
+Gesperrt: 1.240 Teile. Ergebnis der Sortierung: 27 weitere Teile n.i.O.
+
+Fehlerursache, vom Ingenieur ermittelt: Werkzeugverschleiss am Bohrer der Station 30.
+Die Standzeitueberwachung war auf Stueckzahl statt auf Messwert ausgelegt. Die zulaessige
+Werkzeugstandzeit wurde um 3.100 Huebe ueberschritten.
+
+Geplante Abstellmassnahmen: Standzeitgrenze von 15.000 auf 9.000 Huebe reduzieren.
+Zusaetzlich SPC-Messung alle 200 Teile mit Eingriffsgrenze 8,28 mm.
+
+Wirksamkeitsnachweis: beide Massnahmen seit 22.06.2026 aktiv. Nachweis ueber 3.000 Teile
+ohne Ueberschreitung der Eingriffsgrenze gefuehrt. Ermittelter Cpk: 1,67.
+
+Vorbeugemassnahmen: Aenderung dokumentiert im Kontrollplan Rev. 07. Umstellung der
+Standzeitueberwachung von Stueckzahl auf Messwert wird auf die baugleichen Bohrstationen
+20 und 40 uebertragen.
+
+Abschluss: Bericht am 03.07.2026 abgeschlossen und dem Kunden uebermittelt.

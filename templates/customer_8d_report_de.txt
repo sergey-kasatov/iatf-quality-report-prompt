@@ -1,0 +1,12 @@
+Lieferanten-Reklamationsbericht (8D-Report)
+Kunde: Adler Automotive AG | Lieferant: [Lieferant]
+Reklamations-Nr.: REK-2026-0431 | Datum: 03.07.2026
+
+D1 - Team
+D2 - Problembeschreibung
+D3 - Sofortmassnahmen (Containment)
+D4 - Fehlerursache (Root Cause)
+D5 - Geplante Abstellmassnahmen
+D6 - Eingefuehrte Abstellmassnahmen und Wirksamkeitsnachweis
+D7 - Fehlerwiederholung verhindern (Vorbeugemassnahmen)
+D8 - Abschluss

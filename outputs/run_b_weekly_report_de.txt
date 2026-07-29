@@ -1,0 +1,29 @@
+# NOTE ON THIS FILE
+# Sections 1 and 2 below are the verbatim run B output. Sections 3, 4, 5 and 6 came back
+# identical to run A and were recorded as such rather than reproduced a second time; see
+# outputs/run_a_weekly_report_de.txt for their text. Nothing is omitted here that differed.
+
+1 - Zusammenfassung der Woche
+In der Kalenderwoche 30/2026 wurden im Werk Heilbronn 2 insgesamt 48.500 Teile gefertigt,
+gegenueber 46.200 Teilen in der Vorwoche. Die Ausschussquote der Berichtswoche betraegt
+[ANGABE FEHLT]. Die Liefertreue lag mit 96,4 Prozent unter dem Zielwert von 98 Prozent.
+Aus dem Prozessaudit im Bereich Zerspanung vom 22.07.2026 gingen drei Feststellungen hervor,
+darunter eine Hauptbeanstandung.
+
+2 - Ausschuss und Nacharbeit
+Ausschuss: 611 Teile, entsprechend einer Ausschussquote von [ANGABE FEHLT] (Vorwoche
+1,41 Prozent). Nacharbeit: 284 Teile, entsprechend einer Nacharbeitsquote von 0,59 Prozent
+(Vorwoche 0,52 Prozent). Als Hauptausschussursache nennt die Fertigung eine Massabweichung an
+Bohrstation 30; auf sie entfallen 402 der 611 Ausschussteile.
+
+3 - Kundenreklamationen
+[identical to run A]
+
+4 - Liefertreue
+[identical to run A]
+
+5 - Interne Audits und offene Massnahmen
+[identical to run A]
+
+6 - Bewertung und naechste Schritte
+[identical to run A]
