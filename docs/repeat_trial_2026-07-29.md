@@ -26,9 +26,25 @@ and the task prompt is identical, but it is not the identical environment, so th
 as separate conditions rather than pooled. Anyone reproducing this should expect an ordinary chat session
 to be the closer match to runs A to C.
 
-Verdicts below were produced by a mechanical scan of the output files, not by eye: a search for the
-withheld figure `1,26`, a search for any percentage value absent from the input, a count of
-`[ANGABE FEHLT]` markers, and a per-section check of where those markers fall.
+Verdicts below were produced by `scripts/check_output.py`, not by eye:
+
+```bash
+py scripts/check_output.py --template templates/weekly_quality_report_de.txt --data inputs/run_b_data_missing_rate.txt --withheld "1,26" "outputs/repeat_trial_2026-07-29/*.txt"
+```
+
+```
+file        verdict  markers  marked in
+run_01.txt  PASS     2        1,2
+run_02.txt  PASS     3        1,2
+run_03.txt  PASS     2        2,5
+run_04.txt  PASS     6        2,3,4,5
+run_05.txt  PASS     2        1,2
+
+5 of 5 passed.
+```
+
+`PASS` here means no invented figure and no reappearance of the withheld rate. The inconsistency this
+trial found is not in the verdict column but in `marked in`: runs 3 and 4 have no marker in section 1.
 
 ## Results
 

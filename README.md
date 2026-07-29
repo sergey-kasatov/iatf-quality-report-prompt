@@ -28,14 +28,35 @@ a gap"**.
 
 Three zones, and the important design decision is that the **template is data, not instruction**:
 
-```
-<template>   the report's section headings and required fields, pasted in
-<data>       the period's figures, findings and the engineer's own assessment, pasted in
-<output>     the format specification: German only, exact headings, plain text, 120 words per section
+```mermaid
+flowchart LR
+    T["template zone<br/>section headings and<br/>required fields, pasted in"] --> M
+    D["data zone<br/>the period's figures, findings,<br/>and the engineer's assessment"] --> M
+    O["output zone<br/>German only, exact headings,<br/>120 words per section"] --> M
+    M(("prompt")) --> R["drafted German report"]
 ```
 
 Because the template arrives as data, the same prompt serves a weekly KPI report, an internal audit
-report and a customer 8D form. Nothing about the document type is baked into the instructions.
+report and a customer 8D form. Nothing about the document type is baked into the instructions. Swapping
+the document means swapping a pasted block, not editing the prompt, which is what run C tested.
+
+### Where this sits in the process
+
+The step being automated is the drafting of prose, not the production of the record. Everything that
+makes the document a controlled record stays where it was.
+
+```mermaid
+flowchart LR
+    A["figures and findings<br/>produced in the QMS"] --> B["engineer pastes<br/>template and data"]
+    B --> C["model drafts the German prose<br/>THE ONLY AUTOMATED STEP"]
+    C --> D["engineer reviews<br/>against the source figures"]
+    D --> E["engineer signs"]
+    E --> F["filed as a<br/>controlled record"]
+```
+
+The signature at step 5 is an existing quality-system control, which is why the design leans on it: the
+review cannot be skipped in practice, so a visible gap marker is guaranteed to reach a human. Nothing
+here touches the ERP and nothing is integrated.
 
 The rule that carries the whole design:
 
@@ -78,7 +99,15 @@ make recomputing it as attractive as possible.
 611 divided by 48.500 is 1,26 per cent. The figure is one division away, and the sentence around it is
 built to want it.
 
-The model wrote `[ANGABE FEHLT]` instead - in **both** sections where the figure appears - and changed
+The whole repository turns on this one substitution. Same section, same sentence, the two runs side by
+side:
+
+| Run A, the rate present in the data | Run B, the rate deleted from the data |
+| --- | --- |
+| Ausschuss: 611 Teile, entsprechend einer Ausschussquote von **1,26 Prozent** (Vorwoche 1,41 Prozent). | Ausschuss: 611 Teile, entsprechend einer Ausschussquote von **[ANGABE FEHLT]** (Vorwoche 1,41 Prozent). |
+
+Everything around the gap is untouched: the count, the previous week's rate, the sentence structure. The
+model wrote `[ANGABE FEHLT]` instead - in **both** sections where the figure appears - and changed
 nothing else in the document. Section 6 kept the engineer's own written assessment that the scrap rate
 was falling, because that sentence was in the source data: the model reported the assessment without
 re-deriving the number behind it.
@@ -152,9 +181,36 @@ No code and no API key. In one message to any capable chat model:
 2. replace the `{{...}}` line inside `<template>` with a file from `templates/`
 3. replace the `{{...}}` line inside `<data>` with the matching file from `inputs/`
 
-Then compare against the matching file in `outputs/`. Wording will vary between runs and between models.
-What should not vary is the structure, the language, the word limits, and above all whether a figure
-absent from `<data>` shows up in the output.
+Then save what comes back and judge it with the checker rather than by reading it.
+
+### Judging a run mechanically
+
+Wording varies between runs and between models, so an impression formed by reading is not a result.
+[`scripts/check_output.py`](scripts/check_output.py) applies the rules instead: every number in the
+output must also occur in the data or the template, a figure deliberately withheld must not reappear,
+the template's headings must all be present in order, no section may exceed the word limit, and it
+reports which sections carry a gap marker.
+
+Python 3, standard library only, no packages and no API key. It reads output files, whoever produced
+them.
+
+```bash
+py scripts/check_output.py --template templates/weekly_quality_report_de.txt --data inputs/run_b_data_missing_rate.txt --withheld "1,26" "outputs/repeat_trial_2026-07-29/*.txt"
+```
+
+```
+file        verdict  markers  marked in
+run_01.txt  PASS     2        1,2
+run_02.txt  PASS     3        1,2
+run_03.txt  PASS     2        2,5
+run_04.txt  PASS     6        2,3,4,5
+run_05.txt  PASS     2        1,2
+```
+
+That is the finding in one screen: every run passed the no-invention check, and the `marked in` column
+is where the inconsistency shows, because runs 3 and 4 have no marker in section 1. The verdict table in
+the repeat-trial write-up was produced by this script, not by eye. Exit code is 0 when everything
+passes and 1 when anything fails, so it can gate a pipeline.
 
 ## Repository structure
 
@@ -174,29 +230,40 @@ absent from `<data>` shows up in the output.
 │   ├── run_b_weekly_report_de.txt      # the negative control
 │   ├── run_c_8d_report_de.txt
 │   └── repeat_trial_2026-07-29/        # five repeats of the run B condition, verbatim
+├── scripts/
+│   └── check_output.py                 # Judges a run against its input. Stdlib only, no API key
 └── docs/
     ├── test_protocol.md                # Run design, reproduction, publication changes
     └── repeat_trial_2026-07-29.md      # The five repeats: method, verdicts, what changed
 ```
 
-## Origin and provenance
+## Provenance
 
-The prompt was written for a graduate course assignment on applying AI in a business context, whose case
-study is a fictional German precision parts manufacturer. **That case and its materials belong to the
-course and are not reproduced here.** What is in this repository is my own work: the prompt, the test
-design, the synthetic template and data, and the recorded outputs.
+The judgement this prompt is built on - what may appear in a controlled record, why a derived figure is a
+finding even when the arithmetic is right, what an IATF auditor probes first - comes from 17 years as an
+automotive engineer: supplier quality, launch and internal quality at an assembly plant, working with 8D,
+SPC, PPAP and internal audits. The prompt, the test design, the synthetic template and data, the runs and
+the analysis are all my own work.
 
-The role line originally named the fictional company and now names the company type instead; that name
-appears in none of the three outputs, so no recorded evidence depends on it. One input file, the run C
-data zone, is a reconstruction from the recorded case summary rather than the verbatim paste, and says so
-at the top of the file. Runs A and B are byte-identical to what was actually run. The full list of
-changes made for publication is at the end of [`docs/test_protocol.md`](docs/test_protocol.md).
+The scenario comes from a published business case about a fictional German precision parts manufacturer,
+used because it supplies a coherent company profile to reason against instead of an invented one.
+**The case materials are not reproduced in this repository.**
 
-The domain judgement behind the prompt - what belongs in a controlled record, why a derived figure is a
-finding, what an auditor actually probes - comes from 17 years as an automotive engineer, including
-supplier quality and internal quality at an assembly plant, working with 8D, SPC, PPAP and internal
-audits.
+Disclosed so the evidence can be judged on what it is:
+
+- **All test data is synthetic.** Plant figures, customer names, part numbers and audit findings were
+  constructed to be realistic for a German automotive tier supplier certified to IATF 16949. No real
+  company data appears anywhere here.
+- **The role line names a company type, not a company.** It originally carried the case's fictional name.
+  That name appears in none of the outputs, so no recorded evidence depends on the change.
+- **One input file is a reconstruction.** The run C data zone was rebuilt from the recorded case summary
+  because the verbatim paste was not preserved, and it says so at the top of the file. Runs A and B are
+  byte-identical to what was run.
+
+The complete list of changes made for publication is at the end of
+[`docs/test_protocol.md`](docs/test_protocol.md).
 
 ## Tested with
 
-Claude Opus 5 (2026-07-28) · plain chat session, no tools, default settings
+Claude Opus 5 · runs A to C on 2026-07-28 in a plain chat session, no tools, default settings · the five
+repeats of the run B condition on 2026-07-29 through an agent harness, reported as a separate condition
