@@ -51,6 +51,13 @@ reported the assessment rather than re-deriving the number behind it.
 The second half of that result carries as much weight as the first. The rule propagated through the
 whole document instead of being applied only at the one obvious hole.
 
+> **Revised on evidence, 2026-07-29.** This condition was later repeated five times from naive contexts.
+> The no-derivation result held in 5 of 5: nothing computed the rate and no figure absent from the input
+> ever appeared. But the "in both sections" behaviour described above held in only **3 of 5**; in the
+> other two the summary section silently omitted the figure rather than marking it. The paragraph above
+> remains an accurate account of this single run, and is no longer an accurate account of the behaviour
+> in general. See `docs/repeat_trial_2026-07-29.md`.
+
 ## Run C - reusability
 
 Inputs: `templates/customer_8d_report_de.txt` into the `<template>` zone,

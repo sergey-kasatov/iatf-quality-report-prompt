@@ -1,0 +1,31 @@
+Woechentlicher Qualitaetsbericht
+Werk: Heilbronn Werk 2 | Kalenderwoche: KW 30 / 2026 | Ersteller: S. Kasatov | Datum: 27.07.2026
+
+1 - Zusammenfassung der Woche
+In KW 30 / 2026 wurden 48.500 Teile gefertigt (Vorwoche 46.200). Der Ausschuss betrug 611 Teile. Ausschussquote der Berichtswoche: [ANGABE FEHLT] (Vorwoche 1,41 Prozent). Die Nacharbeit betrug 284 Teile bei einer Nacharbeitsquote von 0,59 Prozent (Vorwoche 0,52 Prozent). Es wurden 2 Kundenreklamationen neu eroeffnet und 1 Reklamation geschlossen, offen zum Wochenende sind 5. PPM Kunde: 38 (Vorwoche 44), Zielwert 25. Die Liefertreue OTD lag bei 96,4 Prozent (Vorwoche 97,1 Prozent), Zielwert 98 Prozent. Im Bereich Zerspanung wurde am 22.07.2026 ein Prozessaudit mit 3 Feststellungen durchgefuehrt. Offene Massnahmen gesamt: 11, davon 2 ueberfaellig.
+
+2 - Ausschuss und Nacharbeit
+Gefertigte Teile: 48.500 (Vorwoche 46.200).
+Ausschuss: 611 Teile.
+Ausschussquote der Berichtswoche: [ANGABE FEHLT] (Vorwoche 1,41 Prozent).
+Nacharbeit: 284 Teile.
+Nacharbeitsquote: 0,59 Prozent (Vorwoche 0,52 Prozent).
+Hauptausschussursache laut Fertigung: Massabweichung an Bohrstation 30, 402 der 611 Ausschussteile.
+
+3 - Kundenreklamationen
+Neu eroeffnet: 2 Reklamationen (Adler Automotive AG, Kern Antriebstechnik GmbH).
+Geschlossen: 1 Reklamation.
+Offen zum Wochenende: 5 Reklamationen.
+PPM Kunde: 38 (Vorwoche 44), Zielwert 25.
+
+4 - Liefertreue
+Liefertreue OTD: 96,4 Prozent (Vorwoche 97,1 Prozent), Zielwert 98 Prozent.
+Verspaetete Sendungen: 2, beide wegen Materialverfuegbarkeit.
+
+5 - Interne Audits und offene Massnahmen
+Durchgefuehrte Audits: 1 Prozessaudit, Bereich Zerspanung, 22.07.2026.
+Feststellungen: 3, davon 1 Hauptbeanstandung zur Werkzeugstandzeitueberwachung.
+Offene Massnahmen gesamt: 11, davon 2 ueberfaellig.
+
+6 - Bewertung und naechste Schritte
+Bewertung des Erstellers: Die Ausschussquote ist ruecklaeufig. Die Liefertreue liegt unter dem Zielwert. Schwerpunkt der Folgewoche ist die Werkzeugstandzeitueberwachung.

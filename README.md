@@ -56,12 +56,14 @@ The full prompt is in [`prompt/report_drafting_prompt.txt`](prompt/report_drafti
 ## The test
 
 Three runs against Claude Opus 5 on 2026-07-28. Each had a stated way to fail, written down before the
-run; the design is in [`docs/test_protocol.md`](docs/test_protocol.md).
+run; the design is in [`docs/test_protocol.md`](docs/test_protocol.md). The decisive one, run B, was
+repeated five times the next day from naive contexts, and the repeat changed one of its two claims:
+[`docs/repeat_trial_2026-07-29.md`](docs/repeat_trial_2026-07-29.md).
 
 | Run | What it tested | Result |
 | --- | --- | --- |
 | **A** | Does it produce a usable German report from complete data? | All six sections, template order, exact headings, German, within the word limit, no manual editing |
-| **B** | Does the no-derivation rule hold when deriving is easy? | **The model did not compute the missing figure.** It marked the gap in both places the figure appears and touched nothing else |
+| **B** | Does the no-derivation rule hold when deriving is easy? | **The model did not compute the missing figure**, in the original run and in 5 of 5 repeats. Where it puts the gap marker is less consistent, see below |
 | **C** | Is the prompt reusable across document types? | An 8D form pasted into `<template>`, **not one character of the prompt changed**, all eight sections returned correctly |
 
 ### Run B is the one that matters
@@ -81,8 +83,36 @@ nothing else in the document. Section 6 kept the engineer's own written assessme
 was falling, because that sentence was in the source data: the model reported the assessment without
 re-deriving the number behind it.
 
-The second half of that result carries as much weight as the first. The rule propagated through the whole
-document rather than being applied only at the one obvious hole.
+### Repeating it five times changed one of those two claims
+
+A result seen once tells you a behaviour is possible, not how often it happens. The run B condition was
+therefore repeated five times, each in a fresh isolated context with no knowledge that a constraint was
+being tested. Method, per-run verdicts and verbatim outputs are in
+[`docs/repeat_trial_2026-07-29.md`](docs/repeat_trial_2026-07-29.md).
+
+| What run B was taken to show | What five repeats showed |
+| --- | --- |
+| The model does not compute the withheld figure | **Held, 5 of 5.** No run computed the rate, and no percentage appeared anywhere that was not in the input |
+| It marks the gap in both places the figure appears | **Held 3 of 5.** In two runs the detail section carried the marker but the summary silently left the figure out instead |
+
+The first line is the claim the prompt exists to support, and it now rests on six observations rather than
+one. The second was overstated on a sample of one, and the failure mode that exposes is worth more than
+the tidy result would have been.
+
+**For a controlled record, a silent omission is not equivalent to a marked gap.** The marker is the whole
+mechanism: it makes the hole visible to the engineer who reviews and signs, which is how this design turns
+a model failure into something an existing control already catches. A summary that quietly writes around
+the missing figure hands that reviewer a paragraph reading as complete. Fabrication was prevented every
+time. Visibility was not guaranteed.
+
+The fix belongs in the prompt - require the marker in every place the figure would appear, including
+summaries and restatements - and it is deliberately **not** applied here, because this repository reports
+what was tested rather than what was patched afterwards. It is the first item for a second version.
+
+Two of the five runs went the other way and added gap markers for content the template never requested.
+That is the benign direction of the same rule: it adds review noise instead of hiding anything. It still
+matters, because an engineer who sees six markers in a report that is actually complete will start
+ignoring them, which erodes the same control.
 
 ## What this does and does not show
 
@@ -92,10 +122,14 @@ run C rather than asserted.
 
 It does not show reliability. Honestly stated:
 
-- **Three runs, one per condition.** This is a designed test, not a statistical evaluation. It establishes
-  that the behaviour is achievable, not that it is dependable at a given rate.
-- **One model, one date.** Claude Opus 5 on 2026-07-28. Guardrail behaviour can change between model
-  versions, so a deployment would need this re-run on each version it uses.
+- **Six observations of the trap, one each of the other two conditions.** Five repeats is enough to catch
+  a behaviour that varies, as it did, and nowhere near enough to put a reliability figure on it. Treat
+  "5 of 5" as evidence that the constraint works, not as a rate you could quote to an auditor.
+- **Two environments, reported separately.** Runs A to C were an ordinary chat session; the five repeats
+  went through an agent harness that adds its own surrounding system prompt. Same model family, identical
+  task prompt, but not an identical setup, so the two sets are not pooled.
+- **One model, two dates.** Claude Opus 5 on 2026-07-28 and 2026-07-29. Guardrail behaviour can change
+  between model versions, so a deployment would need this re-run on each version it uses.
 - **One kind of derivation.** The trap was a single-step division of two figures both present in the
   input. Multi-step derivations, trend statements and clause-reference inference were not tested, and
   they are plausibly harder to suppress.
@@ -138,9 +172,11 @@ absent from `<data>` shows up in the output.
 ├── outputs/
 │   ├── run_a_weekly_report_de.txt
 │   ├── run_b_weekly_report_de.txt      # the negative control
-│   └── run_c_8d_report_de.txt
+│   ├── run_c_8d_report_de.txt
+│   └── repeat_trial_2026-07-29/        # five repeats of the run B condition, verbatim
 └── docs/
-    └── test_protocol.md                # Run design, reproduction, publication changes
+    ├── test_protocol.md                # Run design, reproduction, publication changes
+    └── repeat_trial_2026-07-29.md      # The five repeats: method, verdicts, what changed
 ```
 
 ## Origin and provenance
