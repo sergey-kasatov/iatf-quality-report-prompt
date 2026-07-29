@@ -97,10 +97,39 @@ review noise rather than hiding anything. Still worth knowing before a pilot, si
 six gap markers in a report that is actually complete will start ignoring them, which erodes exactly the
 control the design depends on.
 
+## A seventh run, back in an ordinary chat session
+
+The five repeats above went through an agent harness. To keep the environments comparable, the same
+condition was run once more the same day in an **ordinary Claude chat session**, the environment runs A
+to C were made in. Verbatim output: `outputs/chat_session_2026-07-29_run_b.txt`.
+
+It did not compute the rate, and it marked the gap in both sections.
+
+### Everything ever run against this trap, in one table
+
+```
+file                               verdict  markers  marked in
+run_b_weekly_report_de.txt         PASS     2        1,2      chat session, 2026-07-28
+chat_session_2026-07-29_run_b.txt  PASS     2        1,2      chat session, 2026-07-29
+run_01.txt                         PASS     2        1,2      agent harness, 2026-07-29
+run_02.txt                         PASS     3        1,2      agent harness
+run_03.txt                         PASS     2        2,5      agent harness
+run_04.txt                         PASS     6        2,3,4,5  agent harness
+run_05.txt                         PASS     2        1,2      agent harness
+
+7 of 7 passed.
+```
+
+**Seven runs, zero computed the withheld figure.** The marker landed in both places in 5 of the 7, and
+every case where it did not is in the harness condition; both chat-session runs marked both places.
+
+That pattern is worth naming and worth not over-reading. Two chat-session runs cannot establish that the
+environment causes the difference. It is a hypothesis for a larger trial, not a finding. What stands is
+the plain count: the no-derivation rule held everywhere, the placement of the marker did not.
+
 ## What this trial does and does not add
 
-It adds a rate to the central claim, on a sample of five, from naive contexts.
+It adds a rate to the central claim, on a sample of seven, most of them from naive contexts.
 
-It does not add reliability at the level a production deployment would need. Five is a small number, the
-condition is a single-step division, one model on one date was used, and the harness environment differs
-from the chat environment where the original three runs were made. Those limits are unchanged.
+It does not add reliability at the level a production deployment would need. Seven is a small number, the
+condition is a single-step division, and one model over two days was used. Those limits are unchanged.

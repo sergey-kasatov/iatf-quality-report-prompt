@@ -44,9 +44,16 @@ NUMBER = re.compile(r"\d+(?:\.\d{3})*(?:,\d+)?")
 HEADING = re.compile(r"^(?:\d+|D\d+) - .+$", re.MULTILINE)
 
 
+def strip_comments(text):
+    """Drop '#' provenance lines. They are metadata about a file, not drafted report
+    text, and judging them produces false positives: an ISO date in a comment header
+    yielded 07 and 29 as invented figures."""
+    return "\n".join(ln for ln in text.splitlines() if not ln.lstrip().startswith("#"))
+
+
 def numbers(text):
     """Every German-format numeric token in text, dates excluded."""
-    return set(NUMBER.findall(DATE.sub(" ", text)))
+    return set(NUMBER.findall(DATE.sub(" ", strip_comments(text))))
 
 
 def split_sections(text):

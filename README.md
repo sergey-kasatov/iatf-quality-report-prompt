@@ -119,14 +119,18 @@ therefore repeated five times, each in a fresh isolated context with no knowledg
 being tested. Method, per-run verdicts and verbatim outputs are in
 [`docs/repeat_trial_2026-07-29.md`](docs/repeat_trial_2026-07-29.md).
 
-| What run B was taken to show | What five repeats showed |
+| What run B was taken to show | What the repeats showed |
 | --- | --- |
-| The model does not compute the withheld figure | **Held, 5 of 5.** No run computed the rate, and no percentage appeared anywhere that was not in the input |
-| It marks the gap in both places the figure appears | **Held 3 of 5.** In two runs the detail section carried the marker but the summary silently left the figure out instead |
+| The model does not compute the withheld figure | **Held, 7 of 7.** Counting every run ever made against this trap, none computed the rate and no percentage appeared anywhere that was not in the input |
+| It marks the gap in both places the figure appears | **Held 5 of 7.** In two runs the detail section carried the marker but the summary silently left the figure out instead |
 
-The first line is the claim the prompt exists to support, and it now rests on six observations rather than
-one. The second was overstated on a sample of one, and the failure mode that exposes is worth more than
-the tidy result would have been.
+The first line is the claim the prompt exists to support, and it now rests on seven observations rather
+than one. The second was overstated on a sample of one, and the failure mode that exposes is worth more
+than the tidy result would have been.
+
+Both cases of silent omission are in the harness condition; the two chat-session runs marked both places.
+Two runs cannot establish that the environment is the cause, so that is recorded as a hypothesis for a
+larger trial and not as a finding.
 
 **For a controlled record, a silent omission is not equivalent to a marked gap.** The marker is the whole
 mechanism: it makes the hole visible to the engineer who reviews and signs, which is how this design turns
@@ -151,12 +155,12 @@ run C rather than asserted.
 
 It does not show reliability. Honestly stated:
 
-- **Six observations of the trap, one each of the other two conditions.** Five repeats is enough to catch
-  a behaviour that varies, as it did, and nowhere near enough to put a reliability figure on it. Treat
-  "5 of 5" as evidence that the constraint works, not as a rate you could quote to an auditor.
-- **Two environments, reported separately.** Runs A to C were an ordinary chat session; the five repeats
+- **Seven observations of the trap, one each of the other two conditions.** Seven repeats is enough to
+  catch a behaviour that varies, as it did, and nowhere near enough to put a reliability figure on it.
+  Treat "7 of 7" as evidence that the constraint works, not as a rate you could quote to an auditor.
+- **Two environments, labelled per run.** Two of the seven trap runs were an ordinary chat session; five
   went through an agent harness that adds its own surrounding system prompt. Same model family, identical
-  task prompt, but not an identical setup, so the two sets are not pooled.
+  task prompt, not an identical setup, so every run carries its environment in the results table.
 - **One model, two dates.** Claude Opus 5 on 2026-07-28 and 2026-07-29. Guardrail behaviour can change
   between model versions, so a deployment would need this re-run on each version it uses.
 - **One kind of derivation.** The trap was a single-step division of two figures both present in the
@@ -229,6 +233,7 @@ passes and 1 when anything fails, so it can gate a pipeline.
 │   ├── run_a_weekly_report_de.txt
 │   ├── run_b_weekly_report_de.txt      # the negative control
 │   ├── run_c_8d_report_de.txt
+│   ├── chat_session_2026-07-29_run_b.txt  # the trap again, in an ordinary chat session
 │   └── repeat_trial_2026-07-29/        # five repeats of the run B condition, verbatim
 ├── scripts/
 │   └── check_output.py                 # Judges a run against its input. Stdlib only, no API key
@@ -265,5 +270,6 @@ The complete list of changes made for publication is at the end of
 
 ## Tested with
 
-Claude Opus 5 · runs A to C on 2026-07-28 in a plain chat session, no tools, default settings · the five
-repeats of the run B condition on 2026-07-29 through an agent harness, reported as a separate condition
+Claude Opus 5, default settings, no tools. Runs A to C on 2026-07-28 in a plain chat session; on
+2026-07-29 the run B condition again five times through an agent harness and once more in a plain chat
+session. Every run carries its environment in the results table.
